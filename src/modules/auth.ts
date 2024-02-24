@@ -19,7 +19,6 @@ export const createJWT = (user) => {
 
 export const protect = (req, res, next) => {
   const bearer = req.headers.authorization;
-  console.log(bearer);
 
   if (!bearer) {
     res.status(401);
@@ -28,8 +27,6 @@ export const protect = (req, res, next) => {
   }
   const [, token] = bearer.split(" ");
   if (!token) {
-    console.log(token);
-
     res.status(401);
     res.json({ msg: "not authorized" });
     return;
