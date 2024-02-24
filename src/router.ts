@@ -2,36 +2,44 @@ import { Router } from "express";
 import { Request, Response } from "express";
 import { body, oneOf, validationResult } from "express-validator";
 import { Handleinputerrors } from "./modules/middleware";
+import {
+  UpdateProduct,
+  getSingleProduct,
+  createProduct,
+  DeleteProduct,
+  getUserProducts,
+} from "./handlers/product";
+import {
+  DeleteUpdate,
+  GetAllUpdate,
+  createUpdate,
+  getSingleUpdate,
+  updateUpdate,
+} from "./handlers/update";
 interface CustomRequest extends Request {
   user: string;
 }
 const router = Router();
-router.get("/product", (req: CustomRequest, res: Response) => {
-  res.json({ msg: "hkgh" });
-});
-router.get("/product/:id", () => {});
+router.get("/product", getUserProducts);
+router.get("/product/:id", getSingleProduct);
 router.put(
   "/product/:id",
   body("name").isString(),
   Handleinputerrors,
-  (req, res) => {
-    res.json({ msg: "Hello" });
-  }
+  UpdateProduct
 );
 router.post(
   "/product",
   body("name").isString(),
   Handleinputerrors,
-  (req: CustomRequest, res) => {
-    res.send("HI");
-  }
+  createProduct
 );
-router.delete("/product/:id", () => {});
+router.delete("/product/:id", DeleteProduct);
 
 // Update
 
-router.get("/update", () => {});
-router.get("/update/:id", () => {});
+router.get("/update", GetAllUpdate);
+router.get("/update/:id", getSingleUpdate);
 router.put(
   "/update/:id",
   body("title").optional(),
@@ -39,16 +47,17 @@ router.put(
   body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]),
   body("version").optional(),
   Handleinputerrors,
-  () => {}
+  updateUpdate
 );
 router.post(
   "/update",
   body("title").exists(),
   body("body").exists().isString(),
+
   Handleinputerrors,
-  () => {}
+  createUpdate
 );
-router.delete("/update/:id", () => {});
+router.delete("/update/:id", DeleteUpdate);
 
 // Update Points
 
