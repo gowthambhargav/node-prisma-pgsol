@@ -1,7 +1,13 @@
 import { Router } from "express";
-
+import { Request, Response } from "express";
+import { ParsedQs } from "qs";
+interface CustomRequest extends Request {
+  test_secret: string;
+}
 const router = Router();
-router.get("/product", () => {});
+router.get("/product", (req: CustomRequest, res: Response) => {
+  res.json({ msg: req.test_secret });
+});
 router.get("/product/:id", () => {});
 router.put("/product/:id", () => {});
 router.post("/product", () => {});
