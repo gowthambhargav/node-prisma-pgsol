@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Request, Response } from "express";
-import { ParsedQs } from "qs";
+
 interface CustomRequest extends Request {
   test_secret: string;
 }
