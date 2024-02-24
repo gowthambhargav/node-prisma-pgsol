@@ -2,6 +2,7 @@ import express from "express";
 import router from "./router";
 import morgan from "morgan";
 import { Request, Response, NextFunction } from "express";
+import { protect } from "./modules/auth";
 
 interface CustomRequest extends Request {
   test_secret: string;
@@ -15,6 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req: CustomRequest, res: Response) => {
   res.send("Hi Mom");
 });
-app.use("/api", router);
+app.use("/api", protect, router);
 
 export default app;
