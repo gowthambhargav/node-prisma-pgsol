@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req: CustomRequest, res: Response) => {
-  throw new Error("kgjkhg");
+  res.json({ message: "hello" });
 });
 app.use("/api", protect, router);
 app.post("/user", createNewUser);
