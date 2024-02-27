@@ -4,5 +4,5 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 app.listen(config.port, () => {
-  console.log("server is listening", config.port);
+  console.log(`server is listening ${config.port}`);
 });
