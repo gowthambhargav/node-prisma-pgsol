@@ -25,6 +25,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
     "test": "jest",
     "dev": "ts-node src/index.ts"
   },
